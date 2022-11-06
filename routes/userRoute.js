@@ -1,8 +1,9 @@
 const express = require('express')
 const User = require('../models/userModel')
 const router = express.Router()
+const Property = require('../models/addPropertyModel')
 
-
+// for signup
 router.post('/signup',(req,res)=>{
     User.findOne({email:req.body.email},(err,user)=>{
         if(err){
@@ -37,16 +38,42 @@ router.post('/signup',(req,res)=>{
     })
     
 })
-
+//for login
 router.post('/login',(req,res)=>{
     User.findOne({username:req.body.username,password:req.body.password},(err,user)=>{
         if(err){
             console.log(err)
-            res.json(err)
+            res.status(400).json(err)
         }else{
             res.json(user)   
         }
     })
 })
+//for adding property
+// router.post('/add',(req,res)=>{ 
+  
+    
+//      const prop = Property({
+//                     title:req.body.title,
+//                     price:req.body.price,
+//                     area:req.body.area,
+//                    location:req.body.location,
+//                    purpose:req.body.purpose,
+//                    structure:req.body.structure,
+//                    image : req.body.image
 
+
+//                 });
+//                 prop.save()
+//                 .then((err)=>{
+//                     if(err){
+//                         console.log(err)
+//                         res.status(400).json(err)
+//                     }else{
+//                         console.log(prop)
+//                         res.json(prop)
+//                     }
+//                 })
+//             })
+         
 module.exports = router
