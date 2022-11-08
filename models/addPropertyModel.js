@@ -6,11 +6,11 @@ const newSchema = new Schema({
     price:String,
     area:String,
     locatio:String,
-    purpose:String,
-    structure:String,
-    image : Buffer
+   purpose:String,
+   category:String,
+    image : String
 })
 
 
-const Property = mongoose.model('Property',newSchema)
-module.exports = Property
+const Product = mongoose.model('Product',newSchema)
+module.exports = Product

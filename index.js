@@ -9,6 +9,7 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use('/',require('./routes/userRoute'))
+app.use(express.static('public'));
 
 app.listen(port,()=>{
     console.log('port running on '+port)
