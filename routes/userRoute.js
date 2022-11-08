@@ -21,7 +21,7 @@ router.post('/signup',(req,res)=>{
                 .then((err)=>{
                     if(err){
                         console.log(err)
-                        res.json(err)
+                        res.status(400).json(err)
                     }else{
                         console.log(user)
                         res.json(user)
@@ -31,7 +31,7 @@ router.post('/signup',(req,res)=>{
             }else{
 
             res.json({
-                message:'email is not avilable'
+                message:'email is not available'
             })   
             }
         }
@@ -40,8 +40,11 @@ router.post('/signup',(req,res)=>{
 })
 //for login
 router.post('/login',(req,res)=>{
+    console.log(req.body);
     User.findOne({username:req.body.username,password:req.body.password},(err,user)=>{
+        console.log(err)
         if(err){
+
             console.log(err)
             res.status(400).json(err)
         }else{
@@ -75,5 +78,36 @@ router.post('/login',(req,res)=>{
 //                     }
 //                 })
 //             })
+//             const storage = multer.diskStorage({
+//                 destination: './upload/images',
+//                 filename: (req, file, cb) => {
+//                     return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+//                 }
+//             })
+            
+//             const upload = multer({
+//                 storage: storage,
+//                 limits: {
+//                     fileSize: 10
+//                 }
+//             })
+//             app.use('/profile', express.static('upload/images'));
+//             app.post("/upload", upload.single('profile'), (req, res) => {
+            
+//                 res.json({
+//                     success: 1,
+//                     profile_url: `http://localhost:4000/profile/${req.file.filename}`
+//                 })
+//             })
+            
+//             function errHandler(err, req, res, next) {
+//                 if (err instanceof multer.MulterError) {
+//                     res.json({
+//                         success: 0,
+//                         message: err.message
+//                     })
+//                 }
+//             }
+//             app.use(errHandler);
          
 module.exports = router
