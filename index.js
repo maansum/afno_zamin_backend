@@ -9,6 +9,8 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use('/',require('./routes/userRoute'))
+app.use("/products", require("./routes/productRoute"))
+app.use(express.static('images'));
 
 app.listen(port,()=>{
     console.log('port running on '+port)
