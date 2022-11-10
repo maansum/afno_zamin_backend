@@ -5,8 +5,8 @@ const multiparty = require("multiparty");
 const Product = require("../models/addPropertyModel");
 const { default: mongoose } = require("mongoose");
 
-const IMAG_UPLOAD_DIR = "./public/images";
-const IMAGE_BASE_URL = "http://localhost:8000/images/";
+const IMAG_UPLOAD_DIR = "./images";
+const IMAGE_BASE_URL = "http://192.168.30.54:8000/";
 // for signup
 router.post("/signup", (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
@@ -65,15 +65,15 @@ router.get("/login", async (req, res) => {
   }
 });
 // //get added product
-// router.get("/addProduct", async (req, res) => {
-//   try {
-//     const products = await Product.find({});
-//     res.send(products);
-//   } catch (err) {
-//     console.log(err);
-//     res.send({ error: err.message });
-//   }
-// });
+router.get("/user/:id", async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+    res.send(user);
+  } catch (err) {
+    console.log(err);
+    res.send({ error: err.message });
+  }
+});
 //post appi to ADD PROPERTY
 router.post("/addProduct", async (req, res) => {
   try {
